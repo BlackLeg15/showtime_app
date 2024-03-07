@@ -1,0 +1,41 @@
+import 'package:flutter/foundation.dart';
+import 'package:showtime_app/app/core/entities/city_show_entity.dart';
+import 'package:showtime_app/app/core/entities/current_weather_entity.dart';
+import 'package:showtime_app/app/features/show_forecast/dto/get_current_weather_dto.dart';
+
+import '../repository/show_forecast_repository.dart';
+
+class ShowForecastController extends ChangeNotifier {
+  final ShowForecastRepository repository;
+
+  ShowForecastController(this.repository);
+
+  String? exception;
+  bool isLoading = false;
+  CurrentWeatherEntity? currentWeather;
+
+  Future<void> getCityCurrentWeather(CityShowEntity cityShowEntity) async {
+    isLoading = true;
+    exception = null;
+    notifyListeners();
+
+    final result = await repository.getCityCurrentWeather(
+      GetCurrentWeatherDto(
+        cityShowEntity,
+        const String.fromEnvironment('appid'),
+      ),
+    );
+
+    isLoading = false;
+    result.fold(
+      (success) {
+        currentWeather = success;
+      },
+      (failure) {
+        currentWeather = null;
+        exception = 'Couldn\'t get current weather. Code: ${failure.toString()}';
+      },
+    );
+    notifyListeners();
+  }
+}
