@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:showtime_app/app/core/dependency_injection/dependency_injection.dart';
-import 'package:showtime_app/app/core/dependency_injection/dependency_injection_inherited_widget.dart';
-import 'package:showtime_app/app/core/dependency_injection/dependency_injection_initializer.dart';
-import 'package:showtime_app/app/core/dependency_injection/get_it_dependency_injection_imp.dart';
-import 'package:showtime_app/app/core/routing/app_router_config.dart';
+
+import 'core/dependency_injection/dependency_injection.dart';
+import 'core/dependency_injection/dependency_injection_inherited_widget.dart';
+import 'core/dependency_injection/dependency_injection_initializer.dart';
+import 'core/dependency_injection/get_it_dependency_injection_imp.dart';
+import 'core/routing/app_router_config.dart';
 
 class MainApp extends StatefulWidget {
   const MainApp({super.key});

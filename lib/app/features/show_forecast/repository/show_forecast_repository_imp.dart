@@ -1,12 +1,13 @@
 import 'package:result_dart/result_dart.dart';
-import 'package:showtime_app/app/core/endpoints/endpoints.dart';
-import 'package:showtime_app/app/core/entities/current_weather_entity.dart';
-import 'package:showtime_app/app/core/entities/day_forecast_entity.dart';
-import 'package:showtime_app/app/core/http_client/base/http_client.dart';
-import 'package:showtime_app/app/features/show_forecast/dto/get_current_weather_dto.dart';
-import 'package:showtime_app/app/features/show_forecast/dto/get_forecast_dto.dart';
-import 'package:showtime_app/app/features/show_forecast/repository/show_forecast_mapper.dart';
-import 'package:showtime_app/app/features/show_forecast/repository/show_forecast_repository.dart';
+
+import '../../../core/endpoints/endpoints.dart';
+import '../../../core/entities/current_weather_entity.dart';
+import '../../../core/entities/day_forecast_entity.dart';
+import '../../../core/http_client/base/http_client.dart';
+import '../dto/get_current_weather_dto.dart';
+import '../dto/get_forecast_dto.dart';
+import 'show_forecast_mapper.dart';
+import 'show_forecast_repository.dart';
 
 class ShowForecastRepositoryImp implements ShowForecastRepository {
   final HttpClient httpClient;

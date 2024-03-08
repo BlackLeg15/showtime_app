@@ -78,20 +78,6 @@ class _ShowForecastPageState extends State<ShowForecastPage> {
                               style: textTheme.titleLarge,
                             ),
                             const SizedBox(height: 10),
-                            // ListView.builder(
-                            //   shrinkWrap: true,
-                            //   itemCount: dayForecast.forecast.length,
-                            //   itemBuilder: (context, index) {
-                            //     final forecastEntity = dayForecast.forecast[index];
-                            //     return Row(
-                            //       children: [
-                            //         Text('Min: ${forecastEntity.tempMin.toString()}'),
-                            //         const SizedBox(width: 10),
-                            //         Text('Max: ${forecastEntity.tempMax.toString()}'),
-                            //       ],
-                            //     );
-                            //   },
-                            // ),
                             GridView.builder(
                               shrinkWrap: true,
                               itemCount: dayForecast.forecast.length,

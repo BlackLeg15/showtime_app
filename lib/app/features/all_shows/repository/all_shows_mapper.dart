@@ -1,5 +1,6 @@
 import 'package:result_dart/result_dart.dart';
-import 'package:showtime_app/app/core/entities/city_show_entity.dart';
+
+import '../../../core/entities/city_show_entity.dart';
 
 class AllShowsMapper {
   static Result<List<CityShowEntity>, Exception> fromCityListResponse(dynamic response) {

@@ -1,4 +1,4 @@
-import 'package:showtime_app/app/core/entities/city_show_entity.dart';
+import '../../../core/entities/city_show_entity.dart';
 
 class GetCurrentWeatherDto {
   final CityShowEntity _cityShowEntity;

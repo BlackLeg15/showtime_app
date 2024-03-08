@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:showtime_app/app/core/entities/city_show_entity.dart';
-import 'package:showtime_app/app/core/entities/current_weather_entity.dart';
+
+import '../../../core/entities/city_show_entity.dart';
+import '../../../core/entities/current_weather_entity.dart';
 
 class CityWeatherViewModel extends Equatable {
   final CityShowEntity city;

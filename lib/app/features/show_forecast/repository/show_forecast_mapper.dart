@@ -1,9 +1,9 @@
 import 'package:intl/intl.dart';
 import 'package:result_dart/result_dart.dart';
-import 'package:showtime_app/app/core/entities/forecast_entity.dart';
 
 import '../../../core/entities/current_weather_entity.dart';
 import '../../../core/entities/day_forecast_entity.dart';
+import '../../../core/entities/forecast_entity.dart';
 
 class ShowForecastMapper {
   static Result<List<DayForecastEntity>, Exception> fromForecastResponse(dynamic response) {

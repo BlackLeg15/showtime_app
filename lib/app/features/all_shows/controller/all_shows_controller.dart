@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:showtime_app/app/core/entities/city_show_entity.dart';
-import 'package:showtime_app/app/features/all_shows/repository/all_shows_repository.dart';
+
+import '../../../core/entities/city_show_entity.dart';
+import '../repository/all_shows_repository.dart';
 
 class AllShowsController extends ChangeNotifier {
   final AllShowsRepository repository;

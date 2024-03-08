@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:showtime_app/app/core/entities/city_show_entity.dart';
-import 'package:showtime_app/app/core/entities/current_weather_entity.dart';
-import 'package:showtime_app/app/core/entities/day_forecast_entity.dart';
-import 'package:showtime_app/app/features/show_forecast/dto/get_current_weather_dto.dart';
-import 'package:showtime_app/app/features/show_forecast/dto/get_forecast_dto.dart';
 
+import '../../../core/entities/city_show_entity.dart';
+import '../../../core/entities/current_weather_entity.dart';
+import '../../../core/entities/day_forecast_entity.dart';
+import '../dto/get_current_weather_dto.dart';
+import '../dto/get_forecast_dto.dart';
 import '../repository/show_forecast_repository.dart';
 
 class ShowForecastController extends ChangeNotifier {

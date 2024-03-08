@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'controller/all_shows_page.dart';
+import '../controller/all_shows_controller.dart';
 
 class AllShowsPage extends StatefulWidget {
   final AllShowsController controller;
