@@ -21,11 +21,28 @@ class ShowForecastMapper {
     for (var i = 0; i < list.length; i++) {
       final forecast = list[i];
       final date = forecast['dt_txt'];
+      final mainObject = forecast['main'];
+      if (mainObject is! Map) {
+        return Exception('forecast-main-invalid-response').toFailure();
+      }
+      final tempMin = mainObject['temp_min'];
+      if (tempMin is! num) {
+        return Exception('forecast-temp-min-invalid-response').toFailure();
+      }
+      final tempMax = mainObject['temp_max'];
+      if (tempMax is! num) {
+        return Exception('forecast-temp-max-invalid-response').toFailure();
+      }
       final entity = ForecastEntity(
-        tempMin: forecast['main']['temp_min'] * 1.0,
-        tempMax: forecast['main']['temp_max'] * 1.0,
+        tempMin: tempMin * 1.0,
+        tempMax: tempMax * 1.0,
       );
-      final formattedDate = dateFormatter.format(DateTime.parse(date));
+      late final String formattedDate;
+      try {
+        formattedDate = dateFormatter.format(DateTime.parse(date));
+      } catch (e) {
+        return Exception('forecast-date-invalid-response').toFailure();
+      }
       if (map.containsKey(formattedDate)) {
         map[formattedDate]!.add(entity);
       } else {
