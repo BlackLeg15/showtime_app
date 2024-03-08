@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:showtime_app/app/core/entities/city_show_entity.dart';
 import 'package:showtime_app/app/features/all_shows/repository/all_shows_repository.dart';
@@ -9,7 +11,9 @@ class AllShowsController extends ChangeNotifier {
 
   String? exception;
   bool isLoading = false;
-  var cities = <CityShowEntity>[];
+  var _allCities = <CityShowEntity>[];
+  var shownCities = <CityShowEntity>[];
+  Timer? _searchDebouncer;
 
   Future<void> getCities() async {
     isLoading = true;
@@ -21,13 +25,27 @@ class AllShowsController extends ChangeNotifier {
     isLoading = false;
     result.fold(
       (success) {
-        cities = success;
+        _allCities = success;
       },
       (failure) {
-        cities = [];
+        _allCities = [];
         exception = 'Couldn\'t get cities. Code: ${failure.toString()}';
       },
     );
+    shownCities = _allCities;
     notifyListeners();
+  }
+
+  void search(String value) {
+    if (exception != null || _allCities.isEmpty) {
+      return;
+    }
+    if (_searchDebouncer?.isActive == true) {
+      _searchDebouncer?.cancel();
+    }
+    _searchDebouncer = Timer(const Duration(milliseconds: 300), () {
+      shownCities = _allCities.where((element) => element.name.trim().toLowerCase().contains(value.trim().toLowerCase())).toList();
+      notifyListeners();
+    });
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:showtime_app/app/core/entities/city_show_entity.dart';
 import 'package:showtime_app/app/core/entities/current_weather_entity.dart';
+import 'package:showtime_app/app/core/entities/day_forecast_entity.dart';
 import 'package:showtime_app/app/features/show_forecast/dto/get_current_weather_dto.dart';
+import 'package:showtime_app/app/features/show_forecast/dto/get_forecast_dto.dart';
 
 import '../repository/show_forecast_repository.dart';
 
@@ -13,6 +15,7 @@ class ShowForecastController extends ChangeNotifier {
   String? exception;
   bool isLoading = false;
   CurrentWeatherEntity? currentWeather;
+  List<DayForecastEntity> forecast = [];
 
   Future<void> getCityCurrentWeather(CityShowEntity cityShowEntity) async {
     isLoading = true;
@@ -30,9 +33,36 @@ class ShowForecastController extends ChangeNotifier {
     result.fold(
       (success) {
         currentWeather = success;
+        exception = null;
       },
       (failure) {
         currentWeather = null;
+        exception = 'Couldn\'t get current weather. Code: ${failure.toString()}';
+      },
+    );
+    notifyListeners();
+  }
+
+  Future<void> getCityForecast(CityShowEntity cityShowEntity) async {
+    isLoading = true;
+    exception = null;
+    notifyListeners();
+
+    final result = await repository.getCityForecast(
+      GetForecastDto(
+        cityShowEntity,
+        const String.fromEnvironment('appid'),
+      ),
+    );
+
+    isLoading = false;
+    result.fold(
+      (success) {
+        exception = null;
+        forecast = success;
+      },
+      (failure) {
+        forecast = [];
         exception = 'Couldn\'t get current weather. Code: ${failure.toString()}';
       },
     );

@@ -20,4 +20,15 @@ class GetItDependencyInjection implements DependencyInjection {
   void registerFactory<T extends Object>(T Function() factory) {
     GetIt.I.registerFactory<T>(factory);
   }
+
+  @override
+  void registerSingletonAsync<T extends Object>(Future<T> Function() function) {
+    GetIt.I.registerSingletonAsync(function);
+  }
+
+  @override
+  Future<T> getAsync<T extends Object>() {
+    return GetIt.I.getAsync<T>();
+  }
+
 }

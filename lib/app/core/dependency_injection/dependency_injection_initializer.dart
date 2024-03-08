@@ -1,4 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:showtime_app/app/core/dependency_injection/dependency_injection.dart';
 import 'package:showtime_app/app/core/http_client/dio/dio_http_client.dart';
 import 'package:showtime_app/app/core/routing/app_router_config.dart';
@@ -13,9 +17,19 @@ import '../http_client/base/http_client.dart';
 import '../routing/app_router_config_imp.dart';
 
 class DependencyInjectionInitializer {
-  static DependencyInjection call(DependencyInjection di) {
+  static Future<DependencyInjection> call(DependencyInjection di) async {
+    await initializeDateFormatting('pt_BR');
+    final tempDir = await getTemporaryDirectory();
+    final cacheStore = HiveCacheStore(tempDir.path);
+
+    final cacheOptions = CacheOptions(
+      store: cacheStore,
+      policy: CachePolicy.forceCache,
+    );
+
     di.registerSingleton<AppRouterConfig>(GoRouterRouterConfig());
-    di.registerSingleton(Dio());
+
+    di.registerSingleton(Dio()..interceptors.add(DioCacheInterceptor(options: cacheOptions)));
     di.registerSingleton<HttpClient>(DioHttpClient(di()));
     di.registerSingleton<AllShowsRepository>(AllShowsRepositoryImp(di()));
     di.registerSingleton(AllShowsController(di()));

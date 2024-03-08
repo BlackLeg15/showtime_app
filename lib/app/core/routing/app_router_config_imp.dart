@@ -9,29 +9,27 @@ import '../../features/show_forecast/show_forecast_page.dart';
 
 class GoRouterRouterConfig implements AppRouterConfig {
   @override
-  RouterConfig<Object> call() {
-    return GoRouter(
-      routes: [
-        GoRoute(
-          path: '/',
-          builder: (context, state) => AllShowsPage(
-            controller: DependencyInjectionInheritedWidget.get(context),
-          ),
+  RouterConfig<Object> config = GoRouter(
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => AllShowsPage(
+          controller: DependencyInjectionInheritedWidget.get(context),
         ),
-        GoRoute(
-          path: '/forecast',
-          builder: (context, state) {
-            final extra = state.extra;
-            if (extra is CityShowEntity) {
-              return ShowForecastPage(
-                cityShowEntity: extra,
-                controller: DependencyInjectionInheritedWidget.get(context),
-              );
-            }
-            return ErrorWidget(Exception('Couldn\'t find CityShowEntity object'));
-          },
-        ),
-      ],
-    );
-  }
+      ),
+      GoRoute(
+        path: '/forecast',
+        builder: (context, state) {
+          final extra = state.extra;
+          if (extra is CityShowEntity) {
+            return ShowForecastPage(
+              cityShowEntity: extra,
+              controller: DependencyInjectionInheritedWidget.get(context),
+            );
+          }
+          return ErrorWidget(Exception('Couldn\'t find CityShowEntity object'));
+        },
+      ),
+    ],
+  );
 }

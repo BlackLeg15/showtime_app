@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
 
 abstract interface class AppRouterConfig {
-  RouterConfig<Object> call();
+  RouterConfig<Object> get config;
 }
