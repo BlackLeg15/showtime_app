@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../core/entities/city_show_entity.dart';
-import 'controller/show_forecast_controller.dart';
+import '../../../core/entities/city_show_entity.dart';
+import '../controller/show_forecast_controller.dart';
 
 class ShowForecastPage extends StatefulWidget {
   final CityShowEntity cityShowEntity;
