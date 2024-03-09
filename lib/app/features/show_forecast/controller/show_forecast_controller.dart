@@ -12,14 +12,15 @@ class ShowForecastController extends ChangeNotifier {
 
   ShowForecastController(this.repository);
 
-  String? exception;
+  String? currentWeatherException;
+  String? forecastException;
   bool isLoading = false;
   CurrentWeatherEntity? currentWeather;
   List<DayForecastEntity> forecast = [];
 
   Future<void> getCityCurrentWeather(CityShowEntity cityShowEntity) async {
     isLoading = true;
-    exception = null;
+    currentWeatherException = null;
     notifyListeners();
 
     final result = await repository.getCityCurrentWeather(
@@ -33,11 +34,11 @@ class ShowForecastController extends ChangeNotifier {
     result.fold(
       (success) {
         currentWeather = success;
-        exception = null;
+        currentWeatherException = null;
       },
       (failure) {
         currentWeather = null;
-        exception = 'Couldn\'t get current weather. Code: ${failure.toString()}';
+        currentWeatherException = 'Couldn\'t get current weather. ${failure.toString()}';
       },
     );
     notifyListeners();
@@ -45,7 +46,7 @@ class ShowForecastController extends ChangeNotifier {
 
   Future<void> getCityForecast(CityShowEntity cityShowEntity) async {
     isLoading = true;
-    exception = null;
+    forecastException = null;
     notifyListeners();
 
     final result = await repository.getCityForecast(
@@ -58,12 +59,12 @@ class ShowForecastController extends ChangeNotifier {
     isLoading = false;
     result.fold(
       (success) {
-        exception = null;
+        forecastException = null;
         forecast = success;
       },
       (failure) {
         forecast = [];
-        exception = 'Couldn\'t get current weather. Code: ${failure.toString()}';
+        forecastException = 'Couldn\'t get city\'s forecast. ${failure.toString()}';
       },
     );
     notifyListeners();

@@ -33,12 +33,30 @@ class _ShowForecastPageState extends State<ShowForecastPage> {
         child: ListenableBuilder(
           listenable: widget.controller,
           builder: (context, child) {
-            final exception = widget.controller.exception;
-            final hasException = exception != null;
+            final currentWeatherException = widget.controller.currentWeatherException;
+            final forecastException = widget.controller.forecastException;
+            final hasException = currentWeatherException != null || forecastException != null;
             final isLoading = widget.controller.isLoading;
             if (hasException) {
+              final exceptionTextTheme = textTheme.titleLarge;
               return Center(
-                child: Text(exception),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (forecastException != null) ...[
+                      Text(
+                        forecastException,
+                        style: exceptionTextTheme,
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                    if (currentWeatherException != null)
+                      Text(
+                        currentWeatherException,
+                        style: exceptionTextTheme,
+                      ),
+                  ],
+                ),
               );
             }
             if (isLoading) {
@@ -74,7 +92,7 @@ class _ShowForecastPageState extends State<ShowForecastPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              dayForecast.dateTime.toString(),
+                              dayForecast.dateTime,
                               style: textTheme.titleLarge,
                             ),
                             const SizedBox(height: 10),
@@ -89,9 +107,9 @@ class _ShowForecastPageState extends State<ShowForecastPage> {
                                 final forecastEntity = dayForecast.forecast[index];
                                 return Wrap(
                                   children: [
-                                    Text('Min: ${forecastEntity.tempMin.toString()}'),
+                                    Text('Min: ${forecastEntity.tempMin}'),
                                     const SizedBox(width: 10),
-                                    Text('Max: ${forecastEntity.tempMax.toString()}'),
+                                    Text('Max: ${forecastEntity.tempMax}'),
                                   ],
                                 );
                               },
