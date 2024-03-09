@@ -14,7 +14,11 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+  /// Async initialization of the dependency injection service.
   late final Future<DependencyInjection> diFuture;
+
+  /// RouterConfig instance responsible for controlling the
+  /// navigation and routes of the app.
   RouterConfig<Object>? routerConfig;
 
   @override
@@ -29,9 +33,22 @@ class _MainAppState extends State<MainApp> {
       future: diFuture,
       builder: (context, snapshot) {
         final di = snapshot.data;
-        if (snapshot.connectionState == ConnectionState.waiting || di == null) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator.adaptive(),
+          );
+        }
+        if (di == null) {
+          return MaterialApp(
+            home: Builder(builder: (context) {
+              final textTheme = Theme.of(context).textTheme;
+              return Center(
+                child: Text(
+                  'It was not possible to start the app.\nPlease, get in touch with us.\nContact: support@email.com',
+                  style: textTheme.titleLarge,
+                ),
+              );
+            }),
           );
         }
         routerConfig ??= di.get<AppRouterConfig>().config;

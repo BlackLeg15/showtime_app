@@ -5,7 +5,13 @@ import '../../../core/entities/current_weather_entity.dart';
 import '../../../core/entities/day_weather_forecast_entity.dart';
 import '../../../core/entities/weather_forecast_entity.dart';
 
+/// Class that provides functions to turn responses from requests 
+/// to Open Weather API into suitable Dart objects.
+/// It relies on the Result pattern.
 class ShowForecastMapper {
+  /// Turns the response from the forecast request into a suitable Dart object.
+  /// If any exceptions happen, it returns an Exception object.
+  /// It relies on the Result pattern.
   static Result<List<DayWeatherForecastEntity>, Exception> fromForecastResponse(dynamic response) {
     if (response is! Map || response.isEmpty) {
       return Exception('forecast-invalid-response').toFailure();
@@ -66,6 +72,11 @@ class ShowForecastMapper {
     return dayForecastEntity.toSuccess();
   }
 
+  /// Turns response from the current weather request
+  /// into a suitable Dart object.
+  /// If any exceptions happen,
+  /// it returns an Exception object.
+  /// It relies on the Result pattern.
   static Result<CurrentWeatherEntity, Exception> fromCurrentWeatherResponse(dynamic response) {
     if (response is! Map || response.isEmpty) {
       return Exception('current-weather-invalid-response').toFailure();
