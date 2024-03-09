@@ -30,7 +30,10 @@ class DependencyInjectionInitializer {
       cacheStore = HiveCacheStore(tempDir.path);
     }
 
-    final cacheOptions = CacheOptions(store: cacheStore);
+    final cacheOptions = CacheOptions(
+      store: cacheStore,
+      policy: CachePolicy.forceCache,
+    );
 
     di.registerSingleton<AppRouterConfig>(GoRouterRouterConfig());
 
