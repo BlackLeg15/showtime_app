@@ -17,6 +17,7 @@ import '../routing/app_router_config.dart';
 import '../routing/app_router_config_imp.dart';
 import 'dependency_injection.dart';
 
+/// Class for initializing the app's main dependencies
 class DependencyInjectionInitializer {
   static Future<DependencyInjection> call(DependencyInjection di) async {
     await initializeDateFormatting('pt_BR');

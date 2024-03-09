@@ -2,6 +2,8 @@ import 'package:flutter/widgets.dart';
 
 import 'dependency_injection.dart';
 
+/// Class that provides the dependency injection feature 
+/// (i.e. [DependencyInjection]) for the given widget tree (i.e., [child]).
 class DependencyInjectionInheritedWidget extends InheritedWidget {
   final DependencyInjection di;
   const DependencyInjectionInheritedWidget({super.key, required super.child, required this.di});
