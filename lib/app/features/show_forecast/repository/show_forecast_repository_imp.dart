@@ -2,7 +2,7 @@ import 'package:result_dart/result_dart.dart';
 
 import '../../../core/endpoints/endpoints.dart';
 import '../../../core/entities/current_weather_entity.dart';
-import '../../../core/entities/day_forecast_entity.dart';
+import '../../../core/entities/day_weather_forecast_entity.dart';
 import '../../../core/http_client/base/http_client.dart';
 import '../dto/get_current_weather_dto.dart';
 import '../dto/get_forecast_dto.dart';
@@ -31,7 +31,7 @@ class ShowForecastRepositoryImp implements ShowForecastRepository {
   }
 
   @override
-  AsyncResult<List<DayForecastEntity>, Exception> getCityForecast(GetForecastDto dto) async {
+  AsyncResult<List<DayWeatherForecastEntity>, Exception> getCityForecast(GetForecastDto dto) async {
     final response = await httpClient.get(
       Endpoints.forecast,
       queryParameters: dto.toParams(),

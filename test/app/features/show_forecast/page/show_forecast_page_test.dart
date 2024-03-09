@@ -4,8 +4,8 @@ import 'package:mocktail/mocktail.dart';
 import 'package:result_dart/result_dart.dart';
 import 'package:showtime_app/app/core/entities/city_show_entity.dart';
 import 'package:showtime_app/app/core/entities/current_weather_entity.dart';
-import 'package:showtime_app/app/core/entities/day_forecast_entity.dart';
-import 'package:showtime_app/app/core/entities/forecast_entity.dart';
+import 'package:showtime_app/app/core/entities/day_weather_forecast_entity.dart';
+import 'package:showtime_app/app/core/entities/weather_forecast_entity.dart';
 import 'package:showtime_app/app/features/show_forecast/controller/show_forecast_controller.dart';
 import 'package:showtime_app/app/features/show_forecast/dto/get_current_weather_dto.dart';
 import 'package:showtime_app/app/features/show_forecast/dto/get_forecast_dto.dart';
@@ -33,14 +33,13 @@ void main() {
         () => repository.getCityCurrentWeather(any()),
       ).thenAnswer((invocation) async => const CurrentWeatherEntity(
             id: 1,
-            icon: '10d',
             title: 'Title',
             description: 'Description',
           ).toSuccess());
       when(
         () => repository.getCityForecast(any()),
       ).thenAnswer(
-        (invocation) async => <DayForecastEntity>[].toSuccess(),
+        (invocation) async => <DayWeatherForecastEntity>[].toSuccess(),
       );
       await tester.pumpWidget(
         MaterialApp(
@@ -60,17 +59,16 @@ void main() {
         () => repository.getCityCurrentWeather(any()),
       ).thenAnswer((invocation) async => const CurrentWeatherEntity(
             id: 1,
-            icon: '10d',
             title: 'Title',
             description: 'Description',
           ).toSuccess());
       when(
         () => repository.getCityForecast(any()),
       ).thenAnswer(
-        (invocation) async => <DayForecastEntity>[
-          const DayForecastEntity(
-            forecast: [
-              ForecastEntity(
+        (invocation) async => <DayWeatherForecastEntity>[
+          const DayWeatherForecastEntity(
+            weatherForecasts: [
+              WeatherForecastEntity(
                 id: 1,
                 tempMax: 199,
                 tempMin: 188,
@@ -93,7 +91,7 @@ void main() {
       expect(find.text('Title'), findsOne);
       expect(find.text('Description'), findsOne);
       expect(find.text('9 de setembro de 2024'), findsOne);
-      expect(controller.forecast.first.forecast.first.tempMin, 188);
+      expect(controller.forecast.first.weatherForecasts.first.tempMin, 188);
       expect(find.text('Min: 188.0'), findsOne);
       expect(find.text('Max: 199.0'), findsOne);
     });

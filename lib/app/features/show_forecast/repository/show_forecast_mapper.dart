@@ -2,11 +2,11 @@ import 'package:intl/intl.dart';
 import 'package:result_dart/result_dart.dart';
 
 import '../../../core/entities/current_weather_entity.dart';
-import '../../../core/entities/day_forecast_entity.dart';
-import '../../../core/entities/forecast_entity.dart';
+import '../../../core/entities/day_weather_forecast_entity.dart';
+import '../../../core/entities/weather_forecast_entity.dart';
 
 class ShowForecastMapper {
-  static Result<List<DayForecastEntity>, Exception> fromForecastResponse(dynamic response) {
+  static Result<List<DayWeatherForecastEntity>, Exception> fromForecastResponse(dynamic response) {
     if (response is! Map || response.isEmpty) {
       return Exception('forecast-invalid-response').toFailure();
     }
@@ -15,8 +15,8 @@ class ShowForecastMapper {
     if (list is! List || list.isEmpty) {
       return Exception('forecast-list-invalid-response').toFailure();
     }
-    late List<DayForecastEntity> dayForecastEntity;
-    Map<String, List<ForecastEntity>> map = {};
+    late List<DayWeatherForecastEntity> dayForecastEntity;
+    Map<String, List<WeatherForecastEntity>> map = {};
     final dateFormatter = DateFormat.yMMMMd('pt_BR');
     for (var i = 0; i < list.length; i++) {
       final forecast = list[i];
@@ -45,7 +45,7 @@ class ShowForecastMapper {
       if (id is! int) {
         return Exception('forecast-weather-id-invalid-response').toFailure();
       }
-      final entity = ForecastEntity(
+      final entity = WeatherForecastEntity(
         id: id,
         tempMin: tempMin * 1.0,
         tempMax: tempMax * 1.0,
@@ -62,7 +62,7 @@ class ShowForecastMapper {
         map[formattedDate] = [entity];
       }
     }
-    dayForecastEntity = map.entries.map((e) => DayForecastEntity(forecast: e.value, dateTime: e.key)).toList();
+    dayForecastEntity = map.entries.map((e) => DayWeatherForecastEntity(weatherForecasts: e.value, dateTime: e.key)).toList();
     return dayForecastEntity.toSuccess();
   }
 
@@ -96,14 +96,8 @@ class ShowForecastMapper {
       return Exception('current-weather-invalid-main').toFailure();
     }
 
-    final icon = weatherMap['icon'];
-    if (icon is! String) {
-      return Exception('current-weather-invalid-icon').toFailure();
-    }
-
     return CurrentWeatherEntity(
       id: id,
-      icon: icon,
       title: main,
       description: description,
     ).toSuccess();

@@ -5,6 +5,9 @@ import 'package:flutter/foundation.dart';
 import '../../../core/entities/city_show_entity.dart';
 import '../repository/all_shows_repository.dart';
 
+/// This class controls states involving gettings cities with shows,
+/// as well as search for them by name.
+/// It relies on [AllShowsRepository] to get the available cities.
 class AllShowsController extends ChangeNotifier {
   final AllShowsRepository repository;
 

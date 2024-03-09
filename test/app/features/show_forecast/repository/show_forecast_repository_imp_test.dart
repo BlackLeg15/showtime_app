@@ -38,7 +38,6 @@ void main() {
       expect(result.then((value) => value.fold(id, id)), completion(isA<CurrentWeatherEntity>()));
       expect(result.then((value) => value.fold((s) => s.description, id)), completion('moderate rain'));
       expect(result.then((value) => value.fold((s) => s.title, id)), completion('Rain'));
-      expect(result.then((value) => value.fold((s) => s.icon, id)), completion('10d'));
       expect(result.then((value) => value.fold((s) => s.id, id)), completion(501));
     });
     test('If id is missing, it should get an exception', () {

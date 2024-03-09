@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/entities/city_show_entity.dart';
 import '../controller/show_forecast_controller.dart';
 
+/// This page shows a city's current weather plus a 5-day-weather-forecast.
 class ShowForecastPage extends StatefulWidget {
   final CityShowEntity cityShowEntity;
   final ShowForecastController controller;
@@ -101,13 +102,13 @@ class _ShowForecastPageState extends State<ShowForecastPage> {
                             GridView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: dayForecast.forecast.length,
+                              itemCount: dayForecast.weatherForecasts.length,
                               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                                 maxCrossAxisExtent: 400,
                                 mainAxisExtent: 100,
                               ),
                               itemBuilder: (context, index) {
-                                final forecastEntity = dayForecast.forecast[index];
+                                final forecastEntity = dayForecast.weatherForecasts[index];
                                 return Wrap(
                                   key: Key('${forecastEntity.id}'),
                                   children: [

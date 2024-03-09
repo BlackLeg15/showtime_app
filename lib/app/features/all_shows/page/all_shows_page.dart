@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 
 import '../controller/all_shows_controller.dart';
 
+/// All cities with shows are listed here.
+/// By clicking on them, it's possible to see their weather forecast.
+/// Plus, it's possible to search cities by name.
 class AllShowsPage extends StatefulWidget {
   final AllShowsController controller;
   const AllShowsPage({super.key, required this.controller});

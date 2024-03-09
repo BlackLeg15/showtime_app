@@ -11,6 +11,11 @@ class DependencyInjectionInheritedWidget extends InheritedWidget {
     return false;
   }
 
+  /// The [DependencyInjection] from the closest [DependencyInjectionInheritedWidget] 
+  /// instance that encloses the given context.
   static DependencyInjection of(BuildContext context) => context.getInheritedWidgetOfExactType<DependencyInjectionInheritedWidget>()!.di;
+
+  /// It retrieves or creates an instance of a registered type [T] depending on the registration
+  /// function used for this type or based on a name.
   static T get<T extends Object>(BuildContext context) => of(context)();
 }
