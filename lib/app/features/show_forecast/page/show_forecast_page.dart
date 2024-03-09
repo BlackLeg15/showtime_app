@@ -97,6 +97,7 @@ class _ShowForecastPageState extends State<ShowForecastPage> {
                             ),
                             const SizedBox(height: 10),
                             GridView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: dayForecast.forecast.length,
                               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
