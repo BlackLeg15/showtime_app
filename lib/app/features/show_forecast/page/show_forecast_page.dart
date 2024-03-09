@@ -43,16 +43,16 @@ class _ShowForecastPageState extends State<ShowForecastPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    if (forecastException != null) ...[
+                    if (currentWeatherException != null) ...[
                       Text(
-                        forecastException,
+                        currentWeatherException,
                         style: exceptionTextTheme,
                       ),
                       const SizedBox(height: 10),
                     ],
-                    if (currentWeatherException != null)
+                    if (forecastException != null)
                       Text(
-                        currentWeatherException,
+                        forecastException,
                         style: exceptionTextTheme,
                       ),
                   ],
