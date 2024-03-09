@@ -15,14 +15,14 @@ class CityShowEntity extends Equatable {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,
-      'countryCode': countryCode,
+      'country_code': countryCode,
     };
   }
 
   factory CityShowEntity.fromMap(Map<String, dynamic> map) {
     return CityShowEntity(
       name: map['name'] as String,
-      countryCode: map['countryCode'] as String,
+      countryCode: map['country_code'] as String,
     );
   }
 

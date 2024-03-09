@@ -33,7 +33,7 @@ class _AllShowsPageState extends State<AllShowsPage> {
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Search',
-                hintText: 'e.g. São Paulo',
+                hintText: 'Type the name of a city',
               ),
               onChanged: widget.controller.search,
             ),
