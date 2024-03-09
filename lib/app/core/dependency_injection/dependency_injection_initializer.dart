@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
+import 'package:flutter/foundation.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -19,8 +20,13 @@ import 'dependency_injection.dart';
 class DependencyInjectionInitializer {
   static Future<DependencyInjection> call(DependencyInjection di) async {
     await initializeDateFormatting('pt_BR');
-    final tempDir = await getTemporaryDirectory();
-    final cacheStore = HiveCacheStore(tempDir.path);
+    late final CacheStore cacheStore;
+    if (kIsWeb) {
+      cacheStore = MemCacheStore();
+    } else {
+      final tempDir = await getTemporaryDirectory();
+      cacheStore = HiveCacheStore(tempDir.path);
+    }
 
     final cacheOptions = CacheOptions(
       store: cacheStore,
