@@ -62,6 +62,7 @@ class _AllShowsPageState extends State<AllShowsPage> {
                     itemBuilder: (context, index) {
                       final city = cities[index];
                       return ListTile(
+                        key: Key(city.name),
                         title: Text(city.name),
                         onTap: () => kIsWeb ? context.go('/forecast', extra: city) : context.push('/forecast', extra: city),
                       );

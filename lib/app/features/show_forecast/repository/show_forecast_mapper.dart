@@ -33,7 +33,20 @@ class ShowForecastMapper {
       if (tempMax is! num) {
         return Exception('forecast-temp-max-invalid-response').toFailure();
       }
+      final weatherList = forecast['weather'];
+      if (weatherList is! List || weatherList.isEmpty) {
+        return Exception('forecast-weather-invalid-response').toFailure();
+      }
+      final weatherObject = weatherList.first;
+      if (weatherObject is! Map) {
+        return Exception('forecast-weather-object-invalid-response').toFailure();
+      }
+      final id = weatherObject['id'];
+      if (id is! int) {
+        return Exception('forecast-weather-id-invalid-response').toFailure();
+      }
       final entity = ForecastEntity(
+        id: id,
         tempMin: tempMin * 1.0,
         tempMax: tempMax * 1.0,
       );

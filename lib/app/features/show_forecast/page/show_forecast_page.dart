@@ -24,9 +24,10 @@ class _ShowForecastPageState extends State<ShowForecastPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
+    final cityName = widget.cityShowEntity.name;
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.cityShowEntity.name}\'s Forecast'),
+        title: Text('$cityName\'s Forecast'),
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 30),
@@ -88,6 +89,7 @@ class _ShowForecastPageState extends State<ShowForecastPage> {
                       itemBuilder: (context, index) {
                         final dayForecast = forecast[index];
                         return Column(
+                          key: Key('$cityName - ${dayForecast.dateTime}'),
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -107,6 +109,7 @@ class _ShowForecastPageState extends State<ShowForecastPage> {
                               itemBuilder: (context, index) {
                                 final forecastEntity = dayForecast.forecast[index];
                                 return Wrap(
+                                  key: Key('${forecastEntity.id}'),
                                   children: [
                                     Text('Min: ${forecastEntity.tempMin}'),
                                     const SizedBox(width: 10),

@@ -71,6 +71,7 @@ void main() {
           const DayForecastEntity(
             forecast: [
               ForecastEntity(
+                id: 1,
                 tempMax: 199,
                 tempMin: 188,
               ),
