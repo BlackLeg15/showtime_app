@@ -13,6 +13,7 @@ import '../repository/show_forecast_repository.dart';
 class ShowForecastController extends ChangeNotifier {
   final ShowForecastRepository repository;
 
+  /// Creates an [ShowForecastController] instance
   ShowForecastController(this.repository);
 
   String? currentWeatherException;

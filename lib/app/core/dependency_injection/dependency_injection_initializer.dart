@@ -17,8 +17,9 @@ import '../routing/app_router_config.dart';
 import '../routing/app_router_config_imp.dart';
 import 'dependency_injection.dart';
 
-/// Class for initializing the app's main dependencies
+/// Class for initializing the app's main dependencies.
 class DependencyInjectionInitializer {
+  /// Callable function that initializes the app's main dependencies.
   static Future<DependencyInjection> call(DependencyInjection di) async {
     await initializeDateFormatting('pt_BR');
     late final CacheStore cacheStore;

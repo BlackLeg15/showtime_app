@@ -9,9 +9,14 @@ import '../dto/get_forecast_dto.dart';
 import 'show_forecast_mapper.dart';
 import 'show_forecast_repository.dart';
 
+/// Class that implements the necessary functions
+/// for the app to work with current weather and 
+/// forecast weather.
+/// It relies on a [HttpClient] instance to execute http requests.
 class ShowForecastRepositoryImp implements ShowForecastRepository {
   final HttpClient httpClient;
 
+  ///Creates an [ShowForecastRepositoryImp] instance.
   ShowForecastRepositoryImp(this.httpClient);
 
   @override

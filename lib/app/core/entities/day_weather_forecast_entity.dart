@@ -10,6 +10,7 @@ class DayWeatherForecastEntity extends Equatable {
   /// The day for weather forecasts (i.e. [weatherForecasts])
   final String dateTime;
 
+  /// Creates an [DayWeatherForecastEntity] instance
   const DayWeatherForecastEntity({
     required this.weatherForecasts,
     required this.dateTime,

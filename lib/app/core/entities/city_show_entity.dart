@@ -2,12 +2,15 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+/// Class that provides a city's name and country code,
+/// as well as some related functions.
 class CityShowEntity extends Equatable {
   /// e.g. São Paulo
   final String name;
   /// e.g. BR (for Brazil)
   final String countryCode;
 
+  /// Creates an [CityShowEntity] instance
   const CityShowEntity({required this.name, required this.countryCode});
   
   @override

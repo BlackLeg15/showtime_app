@@ -9,6 +9,8 @@ import '../controller/all_shows_controller.dart';
 /// Plus, it's possible to search cities by name.
 class AllShowsPage extends StatefulWidget {
   final AllShowsController controller;
+
+  ///Creates an [AllShowsPage] instance
   const AllShowsPage({super.key, required this.controller});
 
   @override

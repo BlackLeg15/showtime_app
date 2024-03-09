@@ -1,3 +1,4 @@
+/// Default cities to work in this project
 const defaultCities = [
   {
     'name': 'Silverstone',

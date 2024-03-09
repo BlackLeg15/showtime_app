@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 
 import 'dependency_injection.dart';
 
+/// [DependencyInjection] functionality provided by [GetIt].
 class GetItDependencyInjection implements DependencyInjection {
   @override
   T get<T extends Object>() {

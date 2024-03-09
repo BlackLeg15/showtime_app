@@ -5,7 +5,11 @@ import 'dependency_injection.dart';
 /// Class that provides the dependency injection feature 
 /// (i.e. [DependencyInjection]) for the given widget tree (i.e., [child]).
 class DependencyInjectionInheritedWidget extends InheritedWidget {
+  /// Dependencies provider.
+  /// Call its get<T>() function to get a registered instance of type T.
   final DependencyInjection di;
+
+  ///Creates an [DependencyInjectionInheritedWidget] instance.
   const DependencyInjectionInheritedWidget({super.key, required super.child, required this.di});
 
   @override

@@ -4,9 +4,13 @@ import '../../../core/entities/city_show_entity.dart';
 import '../controller/show_forecast_controller.dart';
 
 /// This page shows a city's current weather plus a 5-day-weather-forecast.
+/// As soon as the page is created, it'll call functions to get the current
+/// weather and the 5-day forecast weather.
 class ShowForecastPage extends StatefulWidget {
   final CityShowEntity cityShowEntity;
   final ShowForecastController controller;
+
+  /// Creates an [ShowForecastPage] instance
   const ShowForecastPage({super.key, required this.cityShowEntity, required this.controller});
 
   @override
