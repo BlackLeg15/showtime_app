@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -62,7 +63,7 @@ class _AllShowsPageState extends State<AllShowsPage> {
                       final city = cities[index];
                       return ListTile(
                         title: Text(city.name),
-                        onTap: () => context.push('/forecast', extra: city),
+                        onTap: () => kIsWeb ? context.go('/forecast', extra: city) : context.push('/forecast', extra: city),
                       );
                     },
                   );
