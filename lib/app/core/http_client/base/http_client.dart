@@ -9,11 +9,4 @@ abstract class HttpClient {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   });
-
-  AsyncResult<HttpClientResponse, HttpClientException> post(
-    String path, {
-    Map<String, dynamic>? queryParameters,
-    Map<String, dynamic>? headers,
-    Object? data,
-  });
 }
