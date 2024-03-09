@@ -19,6 +19,11 @@ void main() {
     controller = AllShowsController(repository);
   });
 
+  tearDown(() {
+    reset(repository);
+    controller = AllShowsController(repository);
+  });
+
   group('AllShowsPage |', () {
     testWidgets('Successful initialization', (tester) async {
       final cities = defaultCities.map((e) => CityShowEntity.fromMap(e)).toList();
@@ -39,6 +44,7 @@ void main() {
       for (var i = 0; i < cities.length; i++) {
         expect(find.textContaining(cities[i].name), findsAtLeast(1));
       }
+      verify(() => repository.getCities()).called(1);
     });
     testWidgets('Search city', (tester) async {
       final cities = defaultCities.map((e) => CityShowEntity.fromMap(e)).toList();
@@ -66,6 +72,7 @@ void main() {
         final cityName = cities[i].name;
         expect(find.textContaining(cityName), findsExactly(cityName == searchText ? 2 : 0));
       }
+      verify(() => repository.getCities()).called(1);
     });
   });
 }

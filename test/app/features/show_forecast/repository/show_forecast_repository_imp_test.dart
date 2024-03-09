@@ -27,6 +27,10 @@ void main() {
     registerFallbackValue(correctDto);
   });
 
+  tearDown(() {
+    reset(httpClient);
+  });
+
   group('getCityCurrentWeather |', () {
     test('It must get the current weather successfully', () {
       when(() => httpClient.get(any(), queryParameters: any(named: 'queryParameters'))).thenAnswer(
@@ -39,6 +43,7 @@ void main() {
       expect(result.then((value) => value.fold((s) => s.description, id)), completion('moderate rain'));
       expect(result.then((value) => value.fold((s) => s.title, id)), completion('Rain'));
       expect(result.then((value) => value.fold((s) => s.id, id)), completion(501));
+      verify(() => httpClient.get(any(), queryParameters: any(named: 'queryParameters'))).called(1);
     });
     test('If id is missing, it should get an exception', () {
       when(() => httpClient.get(any(), queryParameters: any(named: 'queryParameters'))).thenAnswer(
@@ -49,6 +54,7 @@ void main() {
 
       expect(result.then((value) => value.fold(id, id)), completion(isA<Exception>()));
       expect(result.then((value) => value.fold(id, (f) => f.toString())), completion(contains('current-weather-invalid-id')));
+      verify(() => httpClient.get(any(), queryParameters: any(named: 'queryParameters'))).called(1);
     });
   });
 }

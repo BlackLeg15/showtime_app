@@ -27,6 +27,11 @@ void main() {
     registerFallbackValue(GetForecastDto(cityShowEntity, ''));
   });
 
+  tearDown(() {
+    reset(repository);
+    controller = ShowForecastController(repository);
+  });
+
   group('ShowForecastPage |', () {
     testWidgets('Empty 5-day-forecast, only current weather', (tester) async {
       when(
@@ -53,6 +58,8 @@ void main() {
 
       expect(find.text('Title'), findsOne);
       expect(find.text('Description'), findsOne);
+      verify(() => repository.getCityCurrentWeather(any())).called(1);
+      verify(() => repository.getCityForecast(any())).called(1);
     });
     testWidgets('Full 5-day-forecast plus current weather', (tester) async {
       when(
@@ -94,6 +101,8 @@ void main() {
       expect(controller.forecast.first.weatherForecasts.first.tempMin, 188);
       expect(find.text('Min: 188.0'), findsOne);
       expect(find.text('Max: 199.0'), findsOne);
+      verify(() => repository.getCityCurrentWeather(any())).called(1);
+      verify(() => repository.getCityForecast(any())).called(1);
     });
     testWidgets('Exceptions happened', (tester) async {
       const currentWeatherException = 'current-weather-invalid-description';
@@ -118,6 +127,8 @@ void main() {
 
       expect(find.textContaining(currentWeatherException), findsOne);
       expect(find.textContaining(forecastException), findsOne);
+      verify(() => repository.getCityCurrentWeather(any())).called(1);
+      verify(() => repository.getCityForecast(any())).called(1);
     });
   });
 }
